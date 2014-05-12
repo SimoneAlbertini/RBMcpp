@@ -35,7 +35,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/RBMcpp/RBM.o \
+	${OBJECTDIR}/RBMcpp/RBMbb.o \
+	${OBJECTDIR}/RBMcpp/RBMglu.o \
+	${OBJECTDIR}/RBMcpp/rbmUtils.o \
+	${OBJECTDIR}/demo.o \
+	${OBJECTDIR}/utils/ConfusionMatrix.o \
+	${OBJECTDIR}/utils/FileInfo.o \
+	${OBJECTDIR}/utils/SVM.o
 
 
 # C Compiler Flags
@@ -52,20 +59,54 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-lopencv_core -lopencv_highgui -lopencv_ml -lopencv_imgproc
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rbmcpp
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk demo
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rbmcpp: ${OBJECTFILES}
-	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rbmcpp ${OBJECTFILES} ${LDLIBSOPTIONS}
+demo: ${OBJECTFILES}
+	${LINK.cc} -o demo ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/main.o: main.cpp 
+${OBJECTDIR}/RBMcpp/RBM.o: RBMcpp/RBM.cpp 
+	${MKDIR} -p ${OBJECTDIR}/RBMcpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -IRBMcpp -Iutils-3rdparty -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RBMcpp/RBM.o RBMcpp/RBM.cpp
+
+${OBJECTDIR}/RBMcpp/RBMbb.o: RBMcpp/RBMbb.cpp 
+	${MKDIR} -p ${OBJECTDIR}/RBMcpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -IRBMcpp -Iutils-3rdparty -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RBMcpp/RBMbb.o RBMcpp/RBMbb.cpp
+
+${OBJECTDIR}/RBMcpp/RBMglu.o: RBMcpp/RBMglu.cpp 
+	${MKDIR} -p ${OBJECTDIR}/RBMcpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -IRBMcpp -Iutils-3rdparty -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RBMcpp/RBMglu.o RBMcpp/RBMglu.cpp
+
+${OBJECTDIR}/RBMcpp/rbmUtils.o: RBMcpp/rbmUtils.cpp 
+	${MKDIR} -p ${OBJECTDIR}/RBMcpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -IRBMcpp -Iutils-3rdparty -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RBMcpp/rbmUtils.o RBMcpp/rbmUtils.cpp
+
+${OBJECTDIR}/demo.o: demo.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -IRBMcpp -Iutils-3rdparty -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/demo.o demo.cpp
+
+${OBJECTDIR}/utils/ConfusionMatrix.o: utils/ConfusionMatrix.cpp 
+	${MKDIR} -p ${OBJECTDIR}/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -IRBMcpp -Iutils-3rdparty -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utils/ConfusionMatrix.o utils/ConfusionMatrix.cpp
+
+${OBJECTDIR}/utils/FileInfo.o: utils/FileInfo.cpp 
+	${MKDIR} -p ${OBJECTDIR}/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -IRBMcpp -Iutils-3rdparty -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utils/FileInfo.o utils/FileInfo.cpp
+
+${OBJECTDIR}/utils/SVM.o: utils/SVM.cpp 
+	${MKDIR} -p ${OBJECTDIR}/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -IRBMcpp -Iutils-3rdparty -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utils/SVM.o utils/SVM.cpp
 
 # Subprojects
 .build-subprojects:
@@ -73,7 +114,7 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rbmcpp
+	${RM} demo
 
 # Subprojects
 .clean-subprojects:

@@ -1,3 +1,7 @@
 build
 dist
 .dep.inc
+traindata.mat
+validationdata.mat
+testdata.mat
+demo

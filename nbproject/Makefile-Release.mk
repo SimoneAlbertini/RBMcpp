@@ -35,7 +35,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/RBMcpp/RBM.o \
+	${OBJECTDIR}/RBMcpp/RBMbb.o \
+	${OBJECTDIR}/RBMcpp/RBMglu.o \
+	${OBJECTDIR}/RBMcpp/rbmUtils.o \
+	${OBJECTDIR}/demo.o \
+	${OBJECTDIR}/utils/ConfusionMatrix.o \
+	${OBJECTDIR}/utils/FileInfo.o \
+	${OBJECTDIR}/utils/SVM.o
 
 
 # C Compiler Flags
@@ -62,10 +69,45 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rbmcpp: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rbmcpp ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/main.o: main.cpp 
+${OBJECTDIR}/RBMcpp/RBM.o: RBMcpp/RBM.cpp 
+	${MKDIR} -p ${OBJECTDIR}/RBMcpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RBMcpp/RBM.o RBMcpp/RBM.cpp
+
+${OBJECTDIR}/RBMcpp/RBMbb.o: RBMcpp/RBMbb.cpp 
+	${MKDIR} -p ${OBJECTDIR}/RBMcpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RBMcpp/RBMbb.o RBMcpp/RBMbb.cpp
+
+${OBJECTDIR}/RBMcpp/RBMglu.o: RBMcpp/RBMglu.cpp 
+	${MKDIR} -p ${OBJECTDIR}/RBMcpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RBMcpp/RBMglu.o RBMcpp/RBMglu.cpp
+
+${OBJECTDIR}/RBMcpp/rbmUtils.o: RBMcpp/rbmUtils.cpp 
+	${MKDIR} -p ${OBJECTDIR}/RBMcpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RBMcpp/rbmUtils.o RBMcpp/rbmUtils.cpp
+
+${OBJECTDIR}/demo.o: demo.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/demo.o demo.cpp
+
+${OBJECTDIR}/utils/ConfusionMatrix.o: utils/ConfusionMatrix.cpp 
+	${MKDIR} -p ${OBJECTDIR}/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utils/ConfusionMatrix.o utils/ConfusionMatrix.cpp
+
+${OBJECTDIR}/utils/FileInfo.o: utils/FileInfo.cpp 
+	${MKDIR} -p ${OBJECTDIR}/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utils/FileInfo.o utils/FileInfo.cpp
+
+${OBJECTDIR}/utils/SVM.o: utils/SVM.cpp 
+	${MKDIR} -p ${OBJECTDIR}/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utils/SVM.o utils/SVM.cpp
 
 # Subprojects
 .build-subprojects:
