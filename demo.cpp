@@ -29,8 +29,8 @@ using std::vector;
 void show_weights_histogram(RBM* rbm, string filename="weight_hist.png")
 {
     float min=0, max=0;
-    cv::Mat hist = artelab::weight_distribution(rbm, 20, min, max);
-    cv::Mat image = artelab::save_and_load_histogram_image(hist, filename);
+    cv::Mat hist = weight_distribution(rbm, 20, min, max);
+    cv::Mat image = save_and_load_histogram_image(hist, filename);
     cv::imshow("Weight distribution", image);
 }
 
@@ -46,8 +46,8 @@ void print_header()
 
 void print_info(RBM* rbm, const int epoch, cv::Mat& train, cv::Mat& val)
 {
-    float mset = artelab::average_mse(rbm, train);
-    float msev = artelab::average_mse(rbm, val);
+    float mset = average_mse(rbm, train);
+    float msev = average_mse(rbm, val);
     float ft = rbm->avg_free_energy(train);
     float fv = rbm->avg_free_energy(val);
     float diff = ft-fv;
@@ -82,7 +82,7 @@ int main(int argc, char** argv)
     cout << "Test data: " << test.rows << "x" << test.cols << endl << endl;
     
     // Train RBM
-    cout << "Training RBM" << endl << endl;
+    cout << "Training RBM" << endl;
     const int num_hid = 200;
     const int epochs = 10;
     RBMglu::TrainParams params;
@@ -107,7 +107,7 @@ int main(int argc, char** argv)
     {
         print_info(&rbm, epoch, train, val);
         
-        artelab::show_bases(&rbm, cv::Size(16,16));
+        show_bases(&rbm, cv::Size(16,16));
         show_weights_histogram(&rbm);
         cv::waitKey(epoch==1? 10000 : 1000);
         
@@ -119,7 +119,7 @@ int main(int argc, char** argv)
         }
     }
     print_info(&rbm, epoch, train, val);
-    artelab::show_bases(&rbm, cv::Size(16,16));
+    show_bases(&rbm, cv::Size(16,16));
     cout << "RBM succesfully trained; press any key to continue... " << flush;
     cv::waitKey();
     cout << endl;
@@ -129,7 +129,7 @@ int main(int argc, char** argv)
     cv::Mat train_feat, test_feat;
     
     // Train classifier
-    artelab::feature_patterns(&rbm, train, train_feat);
+    feature_patterns(&rbm, train, train_feat);
     
     cv::SVMParams svm_params;
     svm_params.kernel_type = cv::SVM::LINEAR;
@@ -150,7 +150,7 @@ int main(int argc, char** argv)
     cout << "Train OA: " << conf.overall_accuracy() << endl;
     
     // Check Test
-    artelab::feature_patterns(&rbm, test, test_feat);
+    feature_patterns(&rbm, test, test_feat);
     conf.reset();
     
     svm.predict(test_feat, predictions);

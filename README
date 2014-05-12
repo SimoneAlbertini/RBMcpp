@@ -1,0 +1,40 @@
+This code is not perfectly engineered bacause was developed for research purpose.
+You are welcome to submit pull requests if you extend it or you find and correct any bug.
+
+
+Requirements
+-----
+
+* C++08 compiler (actually used gcc/g++ 4.8.1)
+* OpenCv 2.4.* with Qt 4 support enabled
+* gnuplot installed on the system.
+
+Some helper functions in rbmUtils rely on unix API to call gnuplot.
+You can exclude the code that relies on them just removing from the source code the display of the weight histogram.
+
+
+Usage
+-----
+
+> tar -xzvf data.tar.gz
+> make clean && make
+> ./demo
+
+The program uses graphical interface to show the bases and the distribution of the weights.
+
+PS. When asked to press keys, focus on the GUI.
+
+
+Acknowledgments
+-----
+
+Read LICENSE for the terms of usage.
+
+If you found this code useful, please cite the following article:
+
+	Unsupervised feature learning for sentiment classification of short documents
+	S. Albertini, A. Zamberletti and I. Gallo
+	Journal for Language Technology and Computational Linguistics (JLCL), 2014
+
+(The article should be in press within summer 2014)
+
