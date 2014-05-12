@@ -105,11 +105,6 @@ namespace artelab
         cv::Mat hid_bias;
 
 
-        // public methods only for test purpose
-        void sample_binary(const cv::Mat& probabilities, cv::Mat& binary_sample);
-        void goodness_gradient(const cv::Mat& visible_state, const cv::Mat& hidden_state, Gradient& gradient);
-        virtual void cd(const int k, const cv::Mat& data_cases, Gradient& gradient) = 0;
-
     protected:
 
         float (*_sampler)(float);
@@ -131,6 +126,9 @@ namespace artelab
 
         cv::Mat _weight_updates;
 
+        void sample_binary(const cv::Mat& probabilities, cv::Mat& binary_sample);
+        void goodness_gradient(const cv::Mat& visible_state, const cv::Mat& hidden_state, Gradient& gradient);
+        virtual void cd(const int k, const cv::Mat& data_cases, Gradient& gradient) = 0;
 
         void init_rng_and_sampler(float (*sampleFun)(float));
         void init_structs_for_train();
