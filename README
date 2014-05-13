@@ -16,7 +16,7 @@ You can exclude the code that relies on them just removing from the source code 
 Usage
 -----
 
-> tar -xzvf data.tar.gz
+> unzip data.zip
 > make clean && make
 > ./demo
 
